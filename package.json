@@ -6,19 +6,6 @@
     "type": "git",
     "url": "https://github.com/yuvalsaraf/react-cordova-boilerplate.git"
   },
-  "keywords": [
-    "react",
-    "reactjs",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack",
-    "flux",
-    "redux",
-    "todomvc"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yuvalsaraf/react-cordova-boilerplate/issues"
@@ -44,7 +31,9 @@
     }
   },
   "homepage": "https://github.com/yuvalsaraf/react-cordova-boilerplate#readme",
-  "dependencies": {},
+  "dependencies": {
+    "react-fontawesome": "^0.3.3"
+  },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "autoprefixer-loader": "^3.1.0",

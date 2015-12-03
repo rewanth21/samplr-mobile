@@ -36,3 +36,9 @@ export function addCredentialsFailure(hint) {
     hint
   };
 }
+
+export function switchToRegistering() {
+  return {
+    type: types.SWITCH_TO_REGISTERING
+  }
+}
