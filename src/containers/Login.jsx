@@ -41,6 +41,8 @@ export class Login extends Component {
     const { registering } = this.props.credentials;
     if (!registering) {
       credentialsActions.switchToRegistering();
+    } else {
+      credentialsActions.switchToLogin();
     }
   }
 
@@ -54,7 +56,7 @@ export class Login extends Component {
     if (registering) {
       reEnterPasswordInput = (
         <div style = {{paddingBottom: '5px'}}>
-          <input type="password" ref="password" placeholder="Re-Enter Password"/>
+          <input type="password" ref="password" placeholder="Re-Enter Password" style={Style.input}/>
         </div>
       )
     }
@@ -66,32 +68,32 @@ export class Login extends Component {
       <div style={this.styles.base}>
 
         {/* Container */}
-        <div style={{position: 'relative', top: '50%', transform: 'translateY(-50%)'}}>
+        <div>
 
           {/* Logo */}
-          <div>
+          <div style={this.styles.logo}>
+            {/* TODO: We don't need this stupid library, just use CSS for FontAwesome */}
             <FontAwesome name="check-square-o" style={this.styles.icon}/>
-            <h1>Samplr</h1>
+            <span>Samplr</span>
           </div>
 
           {/* Login Form */}
-          <div style={{maxHeight: hideLogin ? '0' : '149px', overflow: 'hidden',
-                       transition: 'max-height 0.5s ease-in-out'}}>
+          <div>
             <form onSubmit={::this.handleSubmit}>
               <div style={{paddingTop: '5px'}}>
-                <input type="text" ref="email" placeholder="Email"/>
+                <input type="text" ref="email" placeholder="Email" style={Style.input}/>
               </div>
               <div style={{paddingTop: '5px'}}>
-                <input type="password" ref="password" placeholder="Password"/>
+                <input type="password" ref="password" placeholder="Password" style={Style.input}/>
                 <div style={{height: '1em'}}>{hint && `Hint: ${hint}`}</div>
               </div>
               {reEnterPasswordInput}
               <div style={{paddingTop: '5px'}}>
-                <input type="submit" value={firstButtonText}/>
+                <input type="submit" value={firstButtonText} style={[Style.button, Style.primaryButton]}/>
               </div>
             </form>
 
-            <button onClick={::this.handleSwitch}>{secondButtonText}</button>
+            <button onClick={::this.handleSwitch} style={[Style.button, Style.secondaryButton]}>{secondButtonText}</button>
           </div>
         </div>
       </div>
@@ -109,8 +111,13 @@ export class Login extends Component {
       backgroundColor: Style.BLUE
     },
 
+    logo: {
+      height: '64px'
+    },
+
     icon: {
-      size: '64px'
+      width: '64px',
+      height: '64px'
     }
   }
 }

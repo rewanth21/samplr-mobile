@@ -42,3 +42,9 @@ export function switchToRegistering() {
     type: types.SWITCH_TO_REGISTERING
   }
 }
+
+export function switchToLogin() {
+  return {
+    type: types.SWITCH_TO_LOGIN
+  }
+}
