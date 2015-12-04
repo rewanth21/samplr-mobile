@@ -22,6 +22,7 @@ export class Login extends Component {
     const { credentialsActions } = this.props;
     credentialsActions.addCredentials();
 
+    // TODO: getDOMNode is deprecated
     const email = this.refs.email.getDOMNode().value;
     const password = this.refs.password.getDOMNode().value;
 
@@ -80,20 +81,27 @@ export class Login extends Component {
           {/* Login Form */}
           <div>
             <form onSubmit={::this.handleSubmit}>
+
               <div style={{paddingTop: '5px'}}>
                 <input type="text" ref="email" placeholder="Email" style={Style.input}/>
               </div>
+
               <div style={{paddingTop: '5px'}}>
                 <input type="password" ref="password" placeholder="Password" style={Style.input}/>
                 <div style={{height: '1em'}}>{hint && `Hint: ${hint}`}</div>
               </div>
+
               {reEnterPasswordInput}
+
               <div style={{paddingTop: '5px'}}>
                 <input type="submit" value={firstButtonText} style={[Style.button, Style.primaryButton]}/>
               </div>
+
             </form>
 
-            <button onClick={::this.handleSwitch} style={[Style.button, Style.secondaryButton]}>{secondButtonText}</button>
+            <button onClick={::this.handleSwitch} style={[Style.button, Style.secondaryButton]}>
+              {secondButtonText}
+            </button>
           </div>
         </div>
       </div>
@@ -112,7 +120,9 @@ export class Login extends Component {
     },
 
     logo: {
-      height: '64px'
+      height: '64px',
+      color: 'white',
+      fontSize: '48px'
     },
 
     icon: {
