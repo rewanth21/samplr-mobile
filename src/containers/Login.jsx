@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CredentialsActions from '../actions/CredentialsActions';
+import * as GeneralActions from '../actions/GeneralActions';
 import auth from '../core/auth';
 import * as Style from '../constants/Style.js';
 
@@ -19,16 +20,16 @@ export class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { credentialsActions } = this.props;
+    const { credentialsActions, generalActions } = this.props;
     credentialsActions.addCredentials();
 
-    // TODO: getDOMNode is deprecated
-    const email = this.refs.email.getDOMNode().value;
-    const password = this.refs.password.getDOMNode().value;
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
 
     auth.login(email, password, (authenticated, hint) => {
       if (authenticated) {
         credentialsActions.addCredentialsSucess();
+        generalActions.routeToPage("/main");
       } else {
         credentialsActions.addCredentialsFailure(hint);
       }
@@ -132,4 +133,6 @@ export class Login extends Component {
   }
 }
 
-export default connect(state => ({ general: state.general, credentials: state.credentials }), dispatch => ({ credentialsActions: bindActionCreators(CredentialsActions, dispatch) }))(Login);
+export default connect(state => ({ general: state.general, credentials: state.credentials }),
+                       dispatch => ({ credentialsActions: bindActionCreators(CredentialsActions, dispatch),
+                                       generalActions: bindActionCreators(GeneralActions, dispatch) }))(Login);

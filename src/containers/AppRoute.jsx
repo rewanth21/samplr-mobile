@@ -4,7 +4,7 @@ import { createHistory } from 'history';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Login from './Login.jsx';
-import TodoApp from './TodoApp.jsx';
+import Home from './Home.jsx';
 
 import * as GeneralActions from '../actions/GeneralActions';
 import * as CredentialsActions from '../actions/CredentialsActions';
@@ -15,6 +15,7 @@ import auth from '../core/auth';
   generalActions: bindActionCreators(GeneralActions, dispatch),
   credentialsActions: bindActionCreators(CredentialsActions, dispatch)
 }}))
+
 export default class AppRoute extends Component {
   static propTypes = {
     stores: PropTypes.object,
@@ -40,21 +41,31 @@ export default class AppRoute extends Component {
       }
     });
   }
+
   componentDidMount() {
     this.props.actions.generalActions.mount();
   }
+
   componentDidUpdate(prevProps) {
-    if (this.props.stores.credentials.authenticated !== prevProps.stores.credentials.authenticated) {
-      this.state.history.pushState(null, '/');
-    }
+    console.log("Did update");
+    this.state.history.pushState(null, this.props.stores.general.page);
   }
+
+  /**
+   * Redirects to the login screen if the user is not logged in.
+   */
   checkAuth(nextState, replaceState) {
-    if (!this.props.stores.credentials.authenticated) {
-      replaceState({ nextPathname: nextState.location.pathname }, '/login');
-    }
+    let page = this.props.stores.credentials.authenticated ? '/main' : '/login';
+    console.log(page);
+    GeneralActions.routeToPage(page);
   }
+
+  /**
+   * Pushes the correct page state to the router based on which page we're on
+   */
   handleRedirect(nextState, replaceState) {
-    replaceState({ nextPathname: nextState.location.pathname }, this.props.stores.credentials.authenticated ? '/main' : '/login');
+    replaceState({ nextPathname: nextState.location.pathname },
+                 this.props.stores.general.page);
   }
 
   render() {
@@ -62,7 +73,7 @@ export default class AppRoute extends Component {
 
     return (
       <Router history={history}>
-        <Route path="/main" component={TodoApp} onEnter={::this.checkAuth}/>
+        <Route path="/main" component={Home} onEnter={::this.checkAuth}/>
         <Route path="/login" isFirstRender={(!isMounted)} component={Login}/>
         <Route path="*" onEnter={::this.handleRedirect}/>
       </Router>
