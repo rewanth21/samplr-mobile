@@ -1,6 +1,7 @@
 export function getQuestions(success, error) {
   success([
     {
+      id: 0,
       title: "How are you feeling?",
       responses: [
         {
@@ -18,6 +19,7 @@ export function getQuestions(success, error) {
       ]
     },
     {
+      id: 1,
       title: "How are you sleeping at night?",
       responses: [
         {
@@ -35,6 +37,7 @@ export function getQuestions(success, error) {
       ]
     },
     {
+      id: 2,
       title: "Are you worried right now?",
       responses: [
         {

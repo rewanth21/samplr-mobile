@@ -6,3 +6,10 @@ export function loadedQuestions(questions) {
     questions
   }
 }
+
+export function answerQuestion(responseValue) {
+  return {
+    type: types.ANSWER_QUESTION,
+    responseValue
+  }
+}

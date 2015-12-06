@@ -12,20 +12,32 @@ export class Survey extends Component {
     generalActions: PropTypes.object.isRequired
   };
 
+  componentWillReceiveProps() {
+    // If there are no more questions, reroute to the home page
+    const { survey, generalActions } = this.props;
+    if (survey.questions.length == 0) {
+      generalActions.routeToPage("/main");
+    }
+  }
+
   render() {
-    const { survey } = this.props;
+    const { survey, surveyActions } = this.props;
+
+    // Just a safety check
+    if (survey.questions.length == 0) {
+      return <div></div>;
+    }
 
     var currentQuestion = survey.questions[0];
     var answerButtons = currentQuestion.responses.map(response => {
-      return <button> {response.text} </button>
+      let value = response.value;
+      return <button onClick={() => surveyActions.answerQuestion(value)}>{response.text}</button>
     });
 
     return (
       <div>
-        <div> {currentQuestion.title} </div>
-        <div>
-          {answerButtons}
-        </div>
+        <div>{currentQuestion.title}</div>
+        <div>{answerButtons}</div>
       </div>
     );
   }
