@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CredentialsActions from '../actions/CredentialsActions';
 import * as GeneralActions from '../actions/GeneralActions';
-import auth from '../core/auth';
-import * as Style from '../constants/Style.js';
+import * as HomeActions from '../actions/HomeActions';
+import * as UserService from '../services/UserService';
+import * as Style from '../constants/Style';
 
 @Radium
 export class Login extends Component {
@@ -26,13 +27,11 @@ export class Login extends Component {
     const email = this.refs.email.value;
     const password = this.refs.password.value;
 
-    auth.login(email, password, (authenticated, hint) => {
-      if (authenticated) {
-        credentialsActions.addCredentialsSucess();
-        generalActions.routeToPage("/main");
-      } else {
-        credentialsActions.addCredentialsFailure(hint);
-      }
+    UserService.login(email, password, response => {
+      credentialsActions.addCredentialsSucess(response.token);
+      generalActions.routeToPage("/main");
+    }, error => {
+      // TODO: Add error messaging
     });
   }
 

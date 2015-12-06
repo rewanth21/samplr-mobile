@@ -32,7 +32,8 @@
   },
   "homepage": "https://github.com/yuvalsaraf/react-cordova-boilerplate#readme",
   "dependencies": {
-    "react-fontawesome": "^0.3.3"
+    "react-fontawesome": "^0.3.3",
+    "superagent": "^1.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",

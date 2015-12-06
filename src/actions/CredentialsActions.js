@@ -25,9 +25,10 @@ export function addCredentials() {
     type: types.ADD_CREDENTIALS
   };
 }
-export function addCredentialsSucess() {
+export function addCredentialsSucess(token) {
   return {
-    type: types.ADD_CREDENTIALS_SUCCESS
+    type: types.ADD_CREDENTIALS_SUCCESS,
+    token
   };
 }
 export function addCredentialsFailure(hint) {
