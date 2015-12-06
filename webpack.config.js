@@ -112,7 +112,7 @@ module.exports = {
     })),
     new HtmlWebpackPlugin({
       minify: {},
-      title: 'TodoMVC app',
+      title: 'Samplr',
       bodyContent: __SSR__ ? getServerString() : '',
       template: './src/index.html', // Load a custom template
       inject: 'body' // Inject all scripts into the body
