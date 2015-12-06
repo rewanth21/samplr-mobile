@@ -36,35 +36,11 @@ export class Login extends Component {
     });
   }
 
-  handleSwitch(e) {
-    e.preventDefault();
-
-    const { credentialsActions } = this.props;
-    const { registering } = this.props.credentials;
-    if (!registering) {
-      credentialsActions.switchToRegistering();
-    } else {
-      credentialsActions.switchToLogin();
-    }
-  }
-
   render() {
     const { general, credentials } = this.props;
     const { mounted } = general;
     const { checkingToken, loggingIn, hint, registering } = credentials;
     const hideLogin = (!mounted) || checkingToken || loggingIn;
-
-    var reEnterPasswordInput = null;
-    if (registering) {
-      reEnterPasswordInput = (
-        <div style = {{paddingBottom: '5px'}}>
-          <input type="password" ref="password" placeholder="Re-Enter Password" style={Style.input}/>
-        </div>
-      )
-    }
-
-    var firstButtonText = registering ? "Register" : "Login";
-    var secondButtonText = registering ? "Login" : "Register";
 
     return (
       <div style={this.styles.base}>
@@ -92,17 +68,11 @@ export class Login extends Component {
                 <div style={{height: '1em'}}>{hint && `Hint: ${hint}`}</div>
               </div>
 
-              {reEnterPasswordInput}
-
               <div style={{paddingTop: '5px'}}>
-                <input type="submit" value={firstButtonText} style={[Style.button, Style.primaryButton]}/>
+                <input type="submit" value="Login" style={[Style.button, Style.primaryButton]}/>
               </div>
 
             </form>
-
-            <button onClick={::this.handleSwitch} style={[Style.button, Style.secondaryButton]}>
-              {secondButtonText}
-            </button>
           </div>
         </div>
       </div>

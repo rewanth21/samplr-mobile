@@ -36,15 +36,3 @@ export function addCredentialsFailure(hint) {
     hint
   };
 }
-
-export function switchToRegistering() {
-  return {
-    type: types.SWITCH_TO_REGISTERING
-  }
-}
-
-export function switchToLogin() {
-  return {
-    type: types.SWITCH_TO_LOGIN
-  }
-}
