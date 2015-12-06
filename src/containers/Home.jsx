@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as HomeActions from '../actions/HomeActions';
 import * as CredentialsActions from '../actions/CredentialsActions';
 import * as SurveyActions from '../actions/SurveyActions';
+import * as GeneralActions from '../actions/GeneralActions';
 import auth from '../core/auth';
 import * as UserService from '../services/UserService';
 import * as SurveyService from '../services/SurveyService';
@@ -44,7 +45,8 @@ export class Home extends Component {
 
   // Brings the user to the survey screen
   handleTakeSurvey() {
-
+    const { generalActions } = this.props;
+    generalActions.routeToPage('/survey');
   }
 
   render() {
@@ -62,7 +64,7 @@ export class Home extends Component {
       availableSurvey = (
         <div>
           <div> You have survey questions available </div>
-          <button> Begin </button>
+          <button onClick={::this.handleTakeSurvey}> Begin </button>
         </div>
       );
     }
@@ -86,5 +88,6 @@ export default connect(state => ({
 }), dispatch => ({
   credentialsActions: bindActionCreators(CredentialsActions, dispatch),
   homeActions: bindActionCreators(HomeActions, dispatch),
-  surveyActions: bindActionCreators(SurveyActions, dispatch)
+  surveyActions: bindActionCreators(SurveyActions, dispatch),
+  generalActions: bindActionCreators(GeneralActions, dispatch)
 }))(Home);

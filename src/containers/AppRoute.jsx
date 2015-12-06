@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Login from './Login.jsx';
 import Home from './Home.jsx';
+import Survey from './Survey.jsx';
 
 import * as GeneralActions from '../actions/GeneralActions';
 import * as CredentialsActions from '../actions/CredentialsActions';
@@ -55,9 +56,9 @@ export default class AppRoute extends Component {
    * Redirects to the login screen if the user is not logged in.
    */
   checkAuth(nextState, replaceState) {
-    let page = this.props.stores.credentials.authenticated ? '/main' : '/login';
-    console.log(page);
-    GeneralActions.routeToPage(page);
+    if (!this.props.stores.credentials.authenticated) {
+      GeneralActions.routeToPage('/login');
+    }
   }
 
   /**
@@ -74,6 +75,7 @@ export default class AppRoute extends Component {
     return (
       <Router history={history}>
         <Route path="/main" component={Home} onEnter={::this.checkAuth}/>
+        <Route path="/survey" component={Survey} onEnter={::this.checkAuth}/>
         <Route path="/login" isFirstRender={(!isMounted)} component={Login}/>
         <Route path="*" onEnter={::this.handleRedirect}/>
       </Router>
