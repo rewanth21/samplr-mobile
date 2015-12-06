@@ -2,7 +2,8 @@ import { LOADED_QUESTIONS, ANSWER_QUESTION } from '../constants/SurveyActionType
 
 const initialState = {
   questions: [],
-  answeredQuestions: []
+  answeredQuestions: [],
+  loaded: false
 };
 
 export default function survey(state = initialState, action) {
@@ -12,11 +13,13 @@ export default function survey(state = initialState, action) {
     case LOADED_QUESTIONS:
       return {
         ...state,
+        loaded: true,
         questions
       }
 
     case ANSWER_QUESTION:
       return {
+        ...state,
         // Remove the answered question from the front
         questions: state.questions.slice(1, state.questions.length),
         answeredQuestions: [

@@ -21,7 +21,7 @@ export class Home extends Component {
   };
 
   componentWillMount() {
-    const { homeActions, surveyActions } = this.props;
+    const { homeActions, surveyActions, survey } = this.props;
 
     // TODO: move actions to services
     homeActions.loadHomeInfo();
@@ -31,11 +31,13 @@ export class Home extends Component {
 
     });
 
-    SurveyService.getQuestions((questions) => {
-      surveyActions.loadedQuestions(questions);
-    }, (error) => {
+    if (!survey.loaded) {
+      SurveyService.getQuestions((questions) => {
+        surveyActions.loadedQuestions(questions);
+      }, (error) => {
 
-    });
+      });
+    }
   }
 
   handleLogout() {
