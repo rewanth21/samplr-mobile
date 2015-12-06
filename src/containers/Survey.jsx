@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as SurveyActions from '../actions/SurveyActions';
 import * as GeneralActions from '../actions/GeneralActions';
+import * as HomeActions from '../actions/HomeActions';
 
 export class Survey extends Component {
   static propTypes = {
@@ -14,9 +15,10 @@ export class Survey extends Component {
 
   componentWillReceiveProps() {
     // If there are no more questions, reroute to the home page
-    const { survey, generalActions } = this.props;
+    const { survey, generalActions, homeActions } = this.props;
     if (survey.questions.length == 0) {
       generalActions.routeToPage("/main");
+      homeActions.createNotification("Thank you for taking a survey!");
     }
   }
 
@@ -47,5 +49,6 @@ export default connect(state => ({
   survey: state.survey
 }), dispatch => ({
   surveyActions: bindActionCreators(SurveyActions, dispatch),
-  generalActions: bindActionCreators(GeneralActions, dispatch)
+  generalActions: bindActionCreators(GeneralActions, dispatch),
+  homeActions: bindActionCreators(HomeActions, dispatch)
 }))(Survey);

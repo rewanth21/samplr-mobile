@@ -21,7 +21,7 @@ export class Home extends Component {
   };
 
   componentWillMount() {
-    const { homeActions, surveyActions, survey } = this.props;
+    const { homeActions, surveyActions, survey, home } = this.props;
 
     // TODO: move actions to services
     homeActions.loadHomeInfo();
@@ -37,6 +37,11 @@ export class Home extends Component {
       }, (error) => {
 
       });
+    }
+
+    // Clear any notifications after 3 seconds
+    if (home.notification) {
+      setTimeout(homeActions.clearNotification, 3000);
     }
   }
 
@@ -73,6 +78,8 @@ export class Home extends Component {
 
     return (
       <div>
+        <div>{home.notification}</div>
+
         <div>
           Hi {home.name}!
         </div>
