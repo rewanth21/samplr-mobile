@@ -40,6 +40,7 @@ export class Survey extends Component {
       <div>
         <div>{currentQuestion.title}</div>
         <div>{answerButtons}</div>
+        <div>{survey.answeredQuestions.length} / {survey.answeredQuestions.length + survey.questions.length} Questions Answered </div>
       </div>
     );
   }
