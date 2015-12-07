@@ -28,7 +28,7 @@ export class Login extends Component {
     const password = this.refs.password.value;
 
     UserService.login(email, password, response => {
-      credentialsActions.addCredentialsSucess(response.token);
+      credentialsActions.addCredentialsSucess(response.token, response.user.firstName, response.user.id);
       generalActions.routeToPage("/main");
     }, error => {
       // TODO: Add error messaging

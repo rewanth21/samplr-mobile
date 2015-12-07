@@ -21,7 +21,7 @@ export class Home extends Component {
   };
 
   componentWillMount() {
-    const { homeActions, surveyActions, survey, home } = this.props;
+    const { homeActions, surveyActions, survey, home, credentials } = this.props;
 
     // TODO: move actions to services
     homeActions.loadHomeInfo();
@@ -32,7 +32,7 @@ export class Home extends Component {
     });
 
     if (!survey.loaded) {
-      SurveyService.getQuestions((questions) => {
+      SurveyService.getQuestions(credentials.user, credentials.token, (questions) => {
         surveyActions.loadedQuestions(questions);
       }, (error) => {
 
@@ -57,7 +57,7 @@ export class Home extends Component {
   }
 
   render() {
-    const { home, survey, homeActions } = this.props;
+    const { home, survey, credentials, homeActions } = this.props;
 
     if (home.loading) {
       return (
@@ -81,7 +81,7 @@ export class Home extends Component {
         <div>{home.notification}</div>
 
         <div>
-          Hi {home.name}!
+          Hi {credentials.name}!
         </div>
         {availableSurvey}
 
@@ -93,7 +93,8 @@ export class Home extends Component {
 
 export default connect(state => ({
   home: state.home,
-  survey: state.survey
+  survey: state.survey,
+  credentials: state.credentials
 }), dispatch => ({
   credentialsActions: bindActionCreators(CredentialsActions, dispatch),
   homeActions: bindActionCreators(HomeActions, dispatch),

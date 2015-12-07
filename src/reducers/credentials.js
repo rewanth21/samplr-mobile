@@ -8,11 +8,13 @@ const initialState = {
   loggingIn: false,
   hint: false,
   registering: false,
-  token: null
+  token: null,
+  user: null,
+  name: null
 };
 
 export default function credentials(state = initialState, action) {
-  const { type, token } = action;
+  const { type, token, user, name } = action;
 
   switch (type) {
     case CLEAR_CREDENTIALS:
@@ -43,7 +45,9 @@ export default function credentials(state = initialState, action) {
         ...initialState,
         authenticated: true,
         loggingIn: false,
-        token
+        token,
+        user,
+        name
       };
     case ADD_CREDENTIALS_FAILURE:
       return {

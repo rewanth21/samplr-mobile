@@ -1,5 +1,4 @@
 import request from 'superagent';
-import { dispatch } from 'redux';
 import { DEV_API_ROOT } from '../constants/Service';
 import * as CredentialsActions from '../actions/CredentialsActions';
 import * as GeneralActions from '../actions/GeneralActions';

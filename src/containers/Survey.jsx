@@ -30,7 +30,7 @@ export class Survey extends Component {
       return <div></div>;
     }
 
-    var currentQuestion = survey.questions[0];
+    var currentQuestion = survey.questions[0].question;
     var answerButtons = currentQuestion.responses.map(response => {
       let value = response.value;
       return <button onClick={() => surveyActions.answerQuestion(value)}>{response.text}</button>

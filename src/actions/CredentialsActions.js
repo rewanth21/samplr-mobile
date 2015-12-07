@@ -25,10 +25,12 @@ export function addCredentials() {
     type: types.ADD_CREDENTIALS
   };
 }
-export function addCredentialsSucess(token) {
+export function addCredentialsSucess(token, name, user) {
   return {
     type: types.ADD_CREDENTIALS_SUCCESS,
-    token
+    token,
+    name,
+    user
   };
 }
 export function addCredentialsFailure(hint) {
