@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as SurveyActions from '../actions/SurveyActions';
 import * as GeneralActions from '../actions/GeneralActions';
 import * as HomeActions from '../actions/HomeActions';
+import * as Style from '../constants/Style';
 
 export class Survey extends Component {
   static propTypes = {
@@ -22,6 +23,15 @@ export class Survey extends Component {
     }
   }
 
+  answeredQuestions() {
+    return this.props.survey.answeredQuestions.length;
+  }
+
+  totalQuestions() {
+    return this.props.survey.answeredQuestions.length +
+           this.props.survey.questions.length;
+  }
+
   render() {
     const { survey, surveyActions } = this.props;
 
@@ -31,18 +41,48 @@ export class Survey extends Component {
     }
 
     var currentQuestion = survey.questions[0].question;
-    var answerButtons = currentQuestion.responses.map(response => {
+    var answerButtons = currentQuestion.responses.map((response, index) => {
       let value = response.value;
-      return <button onClick={() => surveyActions.answerQuestion(value)}>{response.text}</button>
+      return <div>
+             <button key={index}
+                     style={[Style.button, Style.primaryButton]}
+                     onClick={() => surveyActions.answerQuestion(value)}>{response.text}</button>
+            </div>
     });
 
     return (
-      <div>
-        <div>{currentQuestion.title}</div>
+      <div style={Style.CONTAINER_BASE}>
+        <div style={Style.largeType}>{currentQuestion.title}</div>
         <div>{answerButtons}</div>
-        <div>{survey.answeredQuestions.length} / {survey.answeredQuestions.length + survey.questions.length} Questions Answered </div>
+        <div style={this.styles.outerBar}>
+          <div style={::this.innerBarStyle()}></div>
+        </div>
+        <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
       </div>
     );
+  }
+
+  /**
+   * Calculates the style needed for the progress bar
+   */
+  innerBarStyle() {
+    const { survey } = this.props;
+    var percentAnswered = Math.round((this.answeredQuestions() / this.totalQuestions()) * 100);
+    return {
+      height: '100%',
+      backgroundColor: Style.GREEN,
+      width: percentAnswered.toString() + '%'
+    }
+  }
+
+  styles = {
+    outerBar: {
+      margin: 'auto',
+      backgroundColor: Style.BLUE,
+      border: '1px solid white',
+      width: '230px',
+      height: '16px'
+    }
   }
 }
 

@@ -15,6 +15,14 @@ export const mediumType = {
   fontSize: '24px'
 }
 
+export const largeType = {
+  width: '250px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  color: 'white',
+  fontSize: '30px'
+}
+
 export const CONTAINER_BASE = {
   paddingTop: '55px',
   position: 'fixed',
@@ -42,6 +50,7 @@ export const input = {
 
 export const button = {
   marginTop: '20px',
+  fontSize: '24px',
   width: '250px',
   height: '50px',
   color: 'white',
@@ -60,7 +69,7 @@ export const primaryButton = {
   borderBottomWidth: '3px',
   ':active': {
     backgroundColor: DARK_GREEN,
-    border: 'none'
+    borderBottom: 'none'
   }
 }
 
