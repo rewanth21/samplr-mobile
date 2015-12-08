@@ -1,0 +1,14 @@
+box: node:4.2.3
+
+build:
+  steps:
+    - script:
+        name: build info
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+
+  after-steps:
+    - slack-notifier:
+        url: $SLACK_URL
+        channel: $SLACK_CHANNEL
