@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'radium';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as HomeActions from '../actions/HomeActions';
@@ -8,7 +9,9 @@ import * as GeneralActions from '../actions/GeneralActions';
 import auth from '../core/auth';
 import * as UserService from '../services/UserService';
 import * as SurveyService from '../services/SurveyService';
+import * as Style from '../constants/Style';
 
+@Radium
 export class Home extends Component {
   static propTypes = {
     // Info about the user
@@ -50,6 +53,7 @@ export class Home extends Component {
   handleLogout() {
     auth.logout();
     this.props.credentialsActions.clearCredentials();
+    this.props.generalActions.routeToPage('/login');
   }
 
   // Brings the user to the survey screen
@@ -61,33 +65,33 @@ export class Home extends Component {
   render() {
     const { home, survey, credentials, homeActions } = this.props;
 
-    if (home.loading) {
-      return (
-        <div> Loading... </div>
-      )
-    }
-
     // Conditionally create a take survey button
     var availableSurvey = null;
     if (survey.questions.length > 0) {
       availableSurvey = (
         <div>
-          <div> You have survey questions available </div>
-          <button onClick={::this.handleTakeSurvey}> Begin </button>
+          <div style={Style.mediumType}> You have survey questions available </div>
+          <button key="0"
+                  style={[Style.button, Style.primaryButton, Style.mediumType]}
+                  onClick={::this.handleTakeSurvey}>Begin</button>
         </div>
       );
     }
 
     return (
-      <div>
+      <div style={Style.CONTAINER_BASE}>
         <div>{home.notification}</div>
 
-        <div>
+        <div style={Style.mediumType}>
           Hi {credentials.name}!
         </div>
         {availableSurvey}
 
-        <button onClick={::this.handleLogout}>Log Out</button>
+        <button key="1"
+                style={[Style.button,
+                        Style.secondaryButton,
+                        Style.smallType]}
+                onClick={::this.handleLogout}>Log Out</button>
       </div>
     );
   }

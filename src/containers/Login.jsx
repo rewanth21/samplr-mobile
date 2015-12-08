@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as CredentialsActions from '../actions/CredentialsActions';
@@ -42,15 +41,13 @@ export class Login extends Component {
     const hideLogin = (!mounted) || checkingToken || loggingIn;
 
     return (
-      <div style={this.styles.base}>
+      <div style={Style.CONTAINER_BASE}>
 
         {/* Container */}
         <div>
 
           {/* Logo */}
           <div style={this.styles.logo}>
-            {/* TODO: We don't need this stupid library, just use CSS for FontAwesome */}
-            <FontAwesome name="check-square-o" style={this.styles.icon}/>
             <span>Samplr</span>
           </div>
 
@@ -68,7 +65,9 @@ export class Login extends Component {
               </div>
 
               <div style={{paddingTop: '5px'}}>
-                <input type="submit" value="Login" style={[Style.button, Style.primaryButton]}/>
+                <input type="submit"
+                       value="Login"
+                       style={[Style.button, Style.primaryButton, Style.mediumType]}/>
               </div>
 
             </form>
@@ -79,16 +78,6 @@ export class Login extends Component {
   }
 
   styles = {
-    base: {
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      width: '100%',
-      height: '100%',
-      textAlign: 'center',
-      backgroundColor: Style.BLUE
-    },
-
     logo: {
       height: '64px',
       color: 'white',
