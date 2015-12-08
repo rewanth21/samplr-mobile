@@ -49,6 +49,10 @@ export const input = {
 }
 
 export const button = {
+
+}
+
+export const primaryButton = {
   marginTop: '20px',
   fontSize: '24px',
   width: '250px',
@@ -56,10 +60,7 @@ export const button = {
   color: 'white',
   ':focus': {
     outline: 0
-  }
-}
-
-export const primaryButton = {
+  },
   backgroundColor: GREEN,
   borderTopStyle: 'none',
   borderRightStyle: 'none',
@@ -74,6 +75,14 @@ export const primaryButton = {
 }
 
 export const secondaryButton = {
+  marginTop: '20px',
+  fontSize: '24px',
+  width: '250px',
+  height: '50px',
+  color: 'white',
+  ':focus': {
+    outline: 0
+  },
   backgroundColor: BLUE,
   border: 'none'
 }

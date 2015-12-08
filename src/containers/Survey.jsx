@@ -45,7 +45,7 @@ export class Survey extends Component {
       let value = response.value;
       return <div>
              <button key={index}
-                     style={[Style.button, Style.primaryButton]}
+                     style={Style.primaryButton}
                      onClick={() => surveyActions.answerQuestion(value)}>{response.text}</button>
             </div>
     });
@@ -77,7 +77,9 @@ export class Survey extends Component {
 
   styles = {
     outerBar: {
-      margin: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: '20px',
       backgroundColor: Style.BLUE,
       border: '1px solid white',
       width: '230px',
