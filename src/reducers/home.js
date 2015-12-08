@@ -1,7 +1,7 @@
 import { LOADED_HOME_INFO, LOAD_HOME_INFO, CREATE_NOTIFICATION, CLEAR_NOTIFICATION } from '../constants/HomeActionTypes';
 
 const initialState = {
-  loading: true,
+  loading: false,
   name: null,
   surveysCompleted: null,
   activeHours: null,

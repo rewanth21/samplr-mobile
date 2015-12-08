@@ -13,3 +13,9 @@ export function answerQuestion(responseValue) {
     responseValue
   }
 }
+
+export function clearAnsweredQuestions() {
+  return {
+    type: types.CLEAR_ANSWERED_QUESTIONS
+  }
+}

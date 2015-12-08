@@ -23,17 +23,19 @@ export class Home extends Component {
   componentWillMount() {
     const { homeActions, surveyActions, survey, home, credentials } = this.props;
 
-    // TODO: move actions to services
-    homeActions.loadHomeInfo();
-    UserService.getUserInfo((name, surveysCompleted, activeHours) => {
-      homeActions.loadedHomeInfo(name, surveysCompleted, activeHours);
-    }, (error) => {
-
-    });
-
     if (!survey.loaded) {
       SurveyService.getQuestions(credentials.user, credentials.token, (questions) => {
         surveyActions.loadedQuestions(questions);
+      }, (error) => {
+        //TODO: Handle error
+      });
+    }
+
+    // If there are any answered questions, send them up to the server
+    // This will happen when navigating back from taking the survey
+    if (survey.answeredQuestions.length > 0) {
+      SurveyService.putQuestions(credentials.user, credentials.token, survey.answeredQuestions, () => {
+
       }, (error) => {
 
       });

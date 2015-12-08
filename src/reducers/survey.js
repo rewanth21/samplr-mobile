@@ -1,4 +1,4 @@
-import { LOADED_QUESTIONS, ANSWER_QUESTION } from '../constants/SurveyActionTypes';
+import { LOADED_QUESTIONS, ANSWER_QUESTION, CLEAR_ANSWERED_QUESTIONS } from '../constants/SurveyActionTypes';
 
 const initialState = {
   questions: [],
@@ -29,6 +29,12 @@ export default function survey(state = initialState, action) {
             value: responseValue
           }
         ]
+      }
+
+    case CLEAR_ANSWERED_QUESTIONS:
+      return {
+        ...state,
+        answeredQuestions: []
       }
 
     default:
