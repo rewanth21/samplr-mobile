@@ -82,7 +82,8 @@ var getServerString = function() {
       throw err;
     }
     var fileContent = fs.readFileSync('/bundle.js').toString('ascii');
-    data = eval(fileContent);
+    //console.log(fileContent);
+    //data = eval(fileContent);
     sync = false;
   });
 

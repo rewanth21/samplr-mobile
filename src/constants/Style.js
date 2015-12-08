@@ -31,10 +31,13 @@ export const CONTAINER_BASE = {
   width: '100%',
   height: '100%',
   textAlign: 'center',
-  backgroundColor: BLUE
+  backgroundColor: BLUE,
+  fontFamily: '"Helvetica", sans-serif'
 }
 
 export const input = {
+  WebkitAppearance: 'none',
+  WebkitBorderRadius: 0,
   backgroundColor: BLUE,
   borderTopStyle: 'none',
   borderRightStyle: 'none',
@@ -53,6 +56,8 @@ export const button = {
 }
 
 export const primaryButton = {
+  '-webkit-appearance': 'none',
+  '-webkit-border-radius': 0,
   marginTop: '20px',
   fontSize: '24px',
   width: '250px',

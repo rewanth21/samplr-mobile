@@ -67,7 +67,7 @@ export class Login extends Component {
               <div style={{paddingTop: '5px'}}>
                 <input type="submit"
                        value="Login"
-                       style={[Style.button, Style.primaryButton, Style.mediumType]}/>
+                       style={[Style.button, Style.primaryButton]}/>
               </div>
 
             </form>

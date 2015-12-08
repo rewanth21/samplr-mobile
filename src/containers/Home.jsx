@@ -26,7 +26,10 @@ export class Home extends Component {
   componentWillMount() {
     const { homeActions, surveyActions, survey, home, credentials } = this.props;
 
+    console.log("SURVEY LOADED");
+    console.log(survey.loaded);
     if (!survey.loaded) {
+      console.log("loading surveys...")
       SurveyService.getQuestions(credentials.user, credentials.token, (questions) => {
         surveyActions.loadedQuestions(questions);
       }, (error) => {
