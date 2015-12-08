@@ -81,9 +81,18 @@ export class Home extends Component {
       );
     }
 
+    var notification = null;
+    if (home.notification) {
+      notification = (
+        <div style={[{width: '100%', position: 'absolute',
+                     top: 0, bottom: 0, backgroundColor: Style.GREEN,
+                     height: '30px', paddingTop: '10px'}, Style.smallType]}>{home.notification}</div>
+      )
+    }
+
     return (
       <div style={Style.CONTAINER_BASE}>
-        <div>{home.notification}</div>
+        {notification}
 
         <div style={Style.mediumType}>
           Hi {credentials.name}!
