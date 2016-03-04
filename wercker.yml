@@ -3,7 +3,7 @@ box: node:4.2.3
 build:
   steps:
     - npm-install 
-    - npm run build
+    - cordova build android
     - npm-test
     - script:
         name: build info
