@@ -7,4 +7,4 @@ describe('Login', () => {
     const element = TestUtils.renderIntoDocument(<Login general={{}} credentials={{}} credentialsActions={{}}/>);
     expect(element).toBeTruthy();
   });
-
+});
