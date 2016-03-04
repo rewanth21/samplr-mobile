@@ -2,7 +2,8 @@ box: node:4.2.3
 
 build:
   steps:
-    - npm-install
+    - npm-install 
+    - npm run build
     - npm-test
     - script:
         name: build info
