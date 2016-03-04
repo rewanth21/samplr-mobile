@@ -2,11 +2,14 @@ box: node:4.2.3
 
 build:
   steps:
+    - npm-install
+    - npm-test
     - script:
         name: build info
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+          
 
   after-steps:
     - slack-notifier:
