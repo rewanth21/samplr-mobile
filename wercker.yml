@@ -10,5 +10,5 @@ build:
 
   after-steps:
     - slack-notifier:
-        url: $SLACK_URL
-        channel: $SLACK_CHANNEL
+        url: https://msd2016.slack.com/
+        channel: https://msd2016.slack.com/messages/led/
