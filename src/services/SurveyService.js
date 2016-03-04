@@ -26,5 +26,5 @@ export function putQuestions(user, token, questions, success, error) {
       console.log(err);
       console.log(res);
 
-    
+    });  
 }
