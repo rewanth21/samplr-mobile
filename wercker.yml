@@ -10,5 +10,5 @@ build:
 
   after-steps:
     - slack-notifier:
-        url: https://msd2016.slack.com/
+        url: https://msd2016.slack.com
         channel: led
