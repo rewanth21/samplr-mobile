@@ -1,5 +1,5 @@
 
-# Samplr Mobile App
+# Samplr Mobile App:::
 
 ## Installing
 1. Install dependencies: ```npm i```
