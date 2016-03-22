@@ -48,7 +48,7 @@ export class Login extends Component {
 
           {/* Logo */}
           <div style={this.styles.logo}>
-            <span>Client-App</span>
+            <span>Client-Login</span>
           </div>
 
           {/* Login Form */}
