@@ -2,16 +2,8 @@ box: node:4.2.3
 
 build:
   steps:
-    - npm-install 
-    - npm-test
     - script:
         name: build info
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
-          
-
-  after-steps:
-    - slack-notifier:
-        url: https://hooks.slack.com/services/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
-        channel: led
