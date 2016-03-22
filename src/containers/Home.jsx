@@ -28,14 +28,14 @@ export class Home extends Component {
 
     console.log("SURVEY LOADED");
     console.log(survey.loaded);
-    if (!survey.loaded) {
+    //if (!survey.loaded) {
       console.log("loading surveys...")
       SurveyService.getQuestions(credentials.user, credentials.token, (questions) => {
         surveyActions.loadedQuestions(questions);
       }, (error) => {
         //TODO: Handle error
       });
-    }
+   // }
 
     // If there are any answered questions, send them up to the server
     // This will happen when navigating back from taking the survey
