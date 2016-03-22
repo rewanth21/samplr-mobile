@@ -48,12 +48,11 @@ export class Login extends Component {
 
           {/* Logo */}
           <div style={this.styles.logo}>
-            <span>Login-Client</span>
+            <span>Client - Login</span>
           </div>
 
           {/* Login Form */}
           <div>
-            <form onSubmit={::this.handleSubmit}>
 
               <div style={{paddingTop: '5px'}}>
                 <input type="text" ref="email" placeholder="Email" style={Style.input}/>
