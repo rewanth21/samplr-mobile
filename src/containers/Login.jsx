@@ -53,7 +53,7 @@ export class Login extends Component {
 
           {/* Login Form */}
           <div>
-
+	   <form onSubmit={::this.handleSubmit}>
               <div style={{paddingTop: '5px'}}>
                 <input type="text" ref="email" placeholder="Email" style={Style.input}/>
               </div>
