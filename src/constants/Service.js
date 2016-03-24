@@ -1,1 +1,1 @@
-export const DEV_API_ROOT = 'http://ec2-54-187-111-245.us-west-2.compute.amazonaws.com:3000/';
+export const DEV_API_ROOT = 'http://ec2-54-186-215-60.us-west-2.compute.amazonaws.com:3000/';
