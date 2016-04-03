@@ -68,27 +68,77 @@ export class Survey extends Component {
     }
 
     var currentQuestion = survey.questions[0].question;
-    var answerButtons = currentQuestion.responses.map((response, index) => {
-      let value = response.value;
-      return <div>
-             <button key={index}
-                     style={Style.primaryButton}
-                     onClick={() => surveyActions.answerQuestion(value)}>{response.text}</button>
-            </div>
+    var data = [];
+    currentQuestion.responses.map((response, index) => {
+      data.push({value: (response.value).toString(), label: response.text})
     });
+    console.log("data:", data);
+    console.log("GLOBAL RESP:", RES_VALUES);
 
-    return (
-      <div style={Style.CONTAINER_BASE}>
-        <div style={Style.largeType}>{currentQuestion.title}</div>
-        <div>{answerButtons}</div>
-        <div style={this.styles.outerBar}>
-          <div style={::this.innerBarStyle()}></div>
+    var questionType = currentQuestion.questionType;
+    var defaultValueForRadiobutton = currentQuestion.responses[0].value;
+
+    console.log("questionType::",questionType);
+
+    if (questionType === "checkbox") {
+
+      return (
+        <div style={Style.CONTAINER_BASE}>
+          <div style={Style.largeType}>{currentQuestion.title}</div>
+          <div>
+            <CheckBoxList defaultData={data}
+                          onChange={this.saveList.bind(this)}
+                          ref="respValues" />
+
+          </div>
+          <div>
+            <button style={Style.primaryButton}
+                    onClick={() => this.sendResponse(RES_VALUES)}
+            >Next</button>
+          </div>
+          <div style={this.styles.outerBar}>
+            <div style={::this.innerBarStyle()}></div>
+          </div>
+          <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
         </div>
-        <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
-      </div>
-    );
-  }
+      );
 
+    } else if (questionType === "radiobutton") {
+
+      var radioButtons = [];
+      currentQuestion.responses.forEach((response, index) => {
+
+        radioButtons.push(
+          (<div>
+            <input type="radio" value={response.value} />{response.text}
+          </div>)
+        );
+      });
+
+      return (
+        <div style={Style.CONTAINER_BASE}>
+          <div style={Style.largeType}>{currentQuestion.title}</div>
+          <div>
+            <RadioGroup name="responseValues" value={defaultValueForRadiobutton} onChange={this.saveListForRadioButton}>
+              {radioButtons}
+            </RadioGroup>
+          </div>
+          <div>
+            <button style={Style.primaryButton}
+                    onClick={() => this.sendResponse(RES_VALUES)}
+            >Next</button>
+          </div>
+          <div style={this.styles.outerBar}>
+            <div style={::this.innerBarStyle()}></div>
+          </div>
+          <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
+        </div>
+      );
+
+    }
+
+
+  }
   /**
    * Calculates the style needed for the progress bar
    */
