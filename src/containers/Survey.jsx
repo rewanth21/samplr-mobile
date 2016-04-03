@@ -7,13 +7,14 @@ import * as HomeActions from '../actions/HomeActions';
 import * as Style from '../constants/Style';
 import CheckBoxList from 'react-checkbox-list';
 import _ from 'lodash';
+import { Button } from 'react-bootstrap';
 import RadioGroup from 'react-radio';
 
 var RES_VALUES = [];
-
 export class Survey extends Component {
   static propTypes = {
     // Available survey questions
+
     survey: PropTypes.object.isRequired,
     surveyActions: PropTypes.object.isRequired,
     generalActions: PropTypes.object.isRequired
@@ -34,10 +35,11 @@ export class Survey extends Component {
 
   totalQuestions() {
     return this.props.survey.answeredQuestions.length +
-           this.props.survey.questions.length;
+      this.props.survey.questions.length;
   }
 
   saveList (values) {
+    console.log("values::",values);
     RES_VALUES = _.map(values, (x) => {
       return {
         value: x
@@ -46,11 +48,13 @@ export class Survey extends Component {
   }
 
   saveListForRadioButton(value) {
+    console.log("value in saveListForRadioButton::", value);
     RES_VALUES = [];
     RES_VALUES.push({value: value});
   }
 
   sendResponse(values) {
+    console.log("Final Values in sendResponse in survey JSx:", values);
     this.props.surveyActions.answerQuestion(values);
     RES_VALUES = [];
     this.refs.respValues.reset();
@@ -65,40 +69,42 @@ export class Survey extends Component {
     }
 
     var currentQuestion = survey.questions[0].question;
-
     var data = [];
     currentQuestion.responses.map((response, index) => {
       data.push({value: (response.value).toString(), label: response.text})
     });
+    console.log("data:", data);
+    console.log("GLOBAL RESP:", RES_VALUES);
 
     var questionType = currentQuestion.questionType;
     var defaultValueForRadiobutton = currentQuestion.responses[0].value;
 
-	
-   if (questionType === "checkbox") {
-    return (
-      <div style={Style.CONTAINER_BASE}>
-        <div style={Style.largeType}>{currentQuestion.title}</div>
+    console.log("questionType::",questionType);
+
+    if (questionType === "checkbox") {
+
+      return (
+        <div style={Style.CONTAINER_BASE}>
+          <div style={Style.largeType}>{currentQuestion.title}</div>
           <div>
             <CheckBoxList defaultData={data}
                           onChange={this.saveList.bind(this)}
                           ref="respValues" />
 
           </div>
-	  <div>
+          <div>
             <button style={Style.primaryButton}
                     onClick={() => this.sendResponse(RES_VALUES)}
             >Next</button>
           </div>
-        <div style={this.styles.outerBar}>
-          <div style={::this.innerBarStyle()}></div>
+          <div style={this.styles.outerBar}>
+            <div style={::this.innerBarStyle()}></div>
+          </div>
+          <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
         </div>
-        <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
-      </div>
-    );
-  }
+      );
 
-  } else if (questionType === "radiobutton") {
+    } else if (questionType === "radiobutton") {
 
       var radioButtons = [];
       currentQuestion.responses.forEach((response, index) => {
@@ -110,7 +116,7 @@ export class Survey extends Component {
         );
       });
 
-     return (
+      return (
         <div style={Style.CONTAINER_BASE}>
           <div style={Style.largeType}>{currentQuestion.title}</div>
           <div>
@@ -129,6 +135,10 @@ export class Survey extends Component {
           <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
         </div>
       );
+
+    }
+
+
   }
 
   /**
