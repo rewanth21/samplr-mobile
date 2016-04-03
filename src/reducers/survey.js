@@ -26,7 +26,7 @@ export default function survey(state = initialState, action) {
           ...state.answeredQuestions,
           {
             id: state.questions[0].id,
-            value: responseValue
+            values: responseValue
           }
         ]
       }
