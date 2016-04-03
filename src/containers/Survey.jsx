@@ -5,6 +5,11 @@ import * as SurveyActions from '../actions/SurveyActions';
 import * as GeneralActions from '../actions/GeneralActions';
 import * as HomeActions from '../actions/HomeActions';
 import * as Style from '../constants/Style';
+import CheckBoxList from 'react-checkbox-list';
+import _ from 'lodash';
+import RadioGroup from 'react-radio';
+
+var RES_VALUES = [];
 
 export class Survey extends Component {
   static propTypes = {
