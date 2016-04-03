@@ -76,7 +76,6 @@ export class Survey extends Component {
     console.log("GLOBAL RESP:", RES_VALUES);
 
     var questionType = currentQuestion.questionType;
-    var defaultValueForRadiobutton = currentQuestion.responses[0].value;
 
     console.log("questionType::",questionType);
 
@@ -119,7 +118,7 @@ export class Survey extends Component {
         <div style={Style.CONTAINER_BASE}>
           <div style={Style.largeType}>{currentQuestion.title}</div>
           <div>
-            <RadioGroup name="responseValues" value={defaultValueForRadiobutton} onChange={this.saveListForRadioButton}>
+            <RadioGroup name="responseValues" onChange={this.saveListForRadioButton}>
               {radioButtons}
             </RadioGroup>
           </div>
