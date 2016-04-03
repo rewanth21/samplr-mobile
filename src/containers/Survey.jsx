@@ -37,6 +37,28 @@ export class Survey extends Component {
            this.props.survey.questions.length;
   }
 
+  saveList (values) {
+    console.log("values::",values);
+    RES_VALUES = _.map(values, (x) => {
+      return {
+        value: x
+      }
+    });
+  }
+
+  saveListForRadioButton(value) {
+    console.log("value in saveListForRadioButton::", value);
+    RES_VALUES = [];
+    RES_VALUES.push({value: value});
+  }
+
+  sendResponse(values) {
+    console.log("Final Values in sendResponse in survey JSx:", values);
+    this.props.surveyActions.answerQuestion(values);
+    RES_VALUES = [];
+    this.refs.respValues.reset();
+  }
+
   render() {
     const { survey, surveyActions } = this.props;
 
