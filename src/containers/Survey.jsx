@@ -10,10 +10,10 @@ import _ from 'lodash';
 import RadioGroup from 'react-radio';
 
 var RES_VALUES = [];
-
 export class Survey extends Component {
   static propTypes = {
     // Available survey questions
+
     survey: PropTypes.object.isRequired,
     surveyActions: PropTypes.object.isRequired,
     generalActions: PropTypes.object.isRequired
@@ -34,7 +34,7 @@ export class Survey extends Component {
 
   totalQuestions() {
     return this.props.survey.answeredQuestions.length +
-           this.props.survey.questions.length;
+      this.props.survey.questions.length;
   }
 
   saveList (values) {
@@ -56,7 +56,12 @@ export class Survey extends Component {
     console.log("Final Values in sendResponse in survey JSx:", values);
     this.props.surveyActions.answerQuestion(values);
     RES_VALUES = [];
+    console.log("refreence-before::",this.refs.respValues);
     this.refs.respValues.reset();
+    console.log("state-before::",this.refs.respValues.state.data);
+
+    console.log("state-after::",this.refs.respValues.state.data);
+    console.log("refreence-after::",this.refs.respValues);
   }
 
   render() {
@@ -74,6 +79,13 @@ export class Survey extends Component {
     });
     console.log("data:", data);
     console.log("GLOBAL RESP:", RES_VALUES);
+    if (this.refs.respValues != undefined) {
+
+      this.refs.respValues.setState({data: data});
+      console.log("this.refs.respValues.setState({data: data}):", this.refs.respValues.state.data);
+    } else {
+      console.log("Undefinedddddd")
+    }
 
     var questionType = currentQuestion.questionType;
 
@@ -138,6 +150,7 @@ export class Survey extends Component {
 
 
   }
+
   /**
    * Calculates the style needed for the progress bar
    */
@@ -171,5 +184,3 @@ export default connect(state => ({
   generalActions: bindActionCreators(GeneralActions, dispatch),
   homeActions: bindActionCreators(HomeActions, dispatch)
 }))(Survey);
-
-
