@@ -11,11 +11,11 @@ new WebpackDevServer(webpack(config), {
   stats: {
     colors: true
   },
-}).listen(3000, '0.0.0.0', function (err) {
+}).listen(3001, '0.0.0.0', function (err) {
   if (err) {
     console.log(err);
   }
 
-  console.log('Listening at localhost:3000');
+  console.log('Listening at localhost:3001');
 
 });

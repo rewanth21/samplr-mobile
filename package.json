@@ -88,7 +88,7 @@
     "build": "webpack -d",
     "build:prod": "webpack -p",
     "build:cordova": "webpack -c",
-    "start": "forever start server.js -d",
+    "start": "node server.js -d",
     "start:prod": "node server.js -p",
     "lint": "eslint --ext .js,.jsx .",
     "test": "karma start"

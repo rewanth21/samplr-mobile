@@ -63,6 +63,15 @@ export class Survey extends Component {
     console.log("state-after::",this.refs.respValues.state.data);
     console.log("refreence-after::",this.refs.respValues);
   }
+   /*handleCheckClick(){
+      document.getElementById("CheckBoXType").checked=true;
+    }*/
+
+    handleRadioClick(){
+      document.getElementById("RadioButtonType").checked=true;
+    }
+    
+  
 
   render() {
     const { survey, surveyActions } = this.props;
@@ -96,16 +105,32 @@ export class Survey extends Component {
       return (
         <div style={Style.CONTAINER_BASE}>
           <div style={Style.largeType}>{currentQuestion.title}</div>
-          <div>
-            <CheckBoxList defaultData={data}
+          <div style={Style.innercontainer}>
+         
+        
+          <div style={Style.fontType}>
+            <CheckBoxList /*id="CheckBoXType"*/ defaultData={data}
                           onChange={this.saveList.bind(this)}
+                         /*onClick={this.handleCheckClick.bind(this)}*/
                           ref="respValues" />
+                          
 
           </div>
+          </div>
+          
           <div>
             <button style={Style.primaryButton}
                     onClick={() => this.sendResponse(RES_VALUES)}
-            >Next</button>
+                    /*{() => {
+                      var c=document.getElementById("CheckBoXType");
+                      if(c.checked===true){
+                         this.sendResponse(RES_VALUES);
+                       }else{
+                        alert("Please select atleast one answer.");
+                       }
+                     }
+                    }*/
+             >Next</button>
           </div>
           <div style={this.styles.outerBar}>
             <div style={::this.innerBarStyle()}></div>
@@ -129,14 +154,29 @@ export class Survey extends Component {
       return (
         <div style={Style.CONTAINER_BASE}>
           <div style={Style.largeType}>{currentQuestion.title}</div>
-          <div>
-            <RadioGroup name="responseValues" onChange={this.saveListForRadioButton}>
+          <div style={Style.innercontainer}>
+       
+        
+          <div style={Style.fontType}>
+            <RadioGroup  id="RadioButtonType" name="responseValues" onChange={this.saveListForRadioButton}
+             onClick={this.handleRadioClick.bind(this)} >
+           
               {radioButtons}
             </RadioGroup>
+            </div>
           </div>
           <div>
             <button style={Style.primaryButton}
-                    onClick={() => this.sendResponse(RES_VALUES)}
+                    onClick={() =>{
+                     var r=document.getElementById("RadioButtonType");
+                     if(r.checked===true){
+                      this.sendResponse(RES_VALUES);
+                     }else{
+                        alert("Please Select aleast one answer");
+                     }
+                    }
+
+                     }
             >Next</button>
           </div>
           <div style={this.styles.outerBar}>
