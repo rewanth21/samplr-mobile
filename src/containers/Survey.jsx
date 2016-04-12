@@ -109,7 +109,7 @@ export class Survey extends Component {
          
         
           <div style={Style.fontType}>
-            <CheckBoxList /*id="CheckBoXType"*/ defaultData={data}
+            <CheckBoxList /*id="CheckBoXType"*/ defaultData={data} 
                           onChange={this.saveList.bind(this)}
                          /*onClick={this.handleCheckClick.bind(this)}*/
                           ref="respValues" />
