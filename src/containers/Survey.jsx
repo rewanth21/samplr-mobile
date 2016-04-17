@@ -184,3 +184,5 @@ export default connect(state => ({
   generalActions: bindActionCreators(GeneralActions, dispatch),
   homeActions: bindActionCreators(HomeActions, dispatch)
 }))(Survey);
+
+
