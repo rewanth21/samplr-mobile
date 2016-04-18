@@ -7,6 +7,14 @@ export const smallType = {
   fontSize: '18px'
 }
 
+export const fontType ={
+    color: 'white',
+    position:'relative',   
+    fontWeight:'bold'
+
+    
+  }
+
 export const mediumType = {
   width: '250px',
   marginLeft: 'auto',
@@ -33,6 +41,18 @@ export const CONTAINER_BASE = {
   textAlign: 'center',
   backgroundColor: BLUE,
   fontFamily: '"Helvetica", sans-serif'
+}
+
+export const innercontainer = {
+   
+   backgroundColor: BLUE,
+   width: '10%',
+   height: '16%',
+   textAlign: 'left',
+   fontFamily: '"Helvetica", sans-serif',
+   marginLeft: 'auto',
+   marginRight: 'auto'
+   
 }
 
 export const input = {
