@@ -8,8 +8,11 @@ import * as Style from '../constants/Style';
 import CheckBoxList from 'react-checkbox-list';
 import _ from 'lodash';
 import RadioGroup from 'react-radio';
+import ReactSliderNativeBootstrap from 'react-bootstrap-native-slider';
 
 var RES_VALUES = [];
+var sliderValue = 5;
+
 export class Survey extends Component {
   static propTypes = {
     // Available survey questions
@@ -52,6 +55,17 @@ export class Survey extends Component {
     RES_VALUES.push({value: value});
   }
 
+
+  saveListForSlider(e) {
+    console.log("value in saveListForSlider::", e.target.value);
+    document.getElementById('rangeVal').value = e.target.value;
+    sliderValue = e.target.value;
+    console.log("New slider Value::", sliderValue);
+    RES_VALUES = [];
+    RES_VALUES.push({value: e.target.value});
+  }
+
+
   sendResponse(values) {
     console.log("Final Values in sendResponse in survey JSx:", values);
     this.props.surveyActions.answerQuestion(values);
@@ -62,10 +76,11 @@ export class Survey extends Component {
 
     console.log("state-after::",this.refs.respValues.state.data);
     console.log("refreence-after::",this.refs.respValues);
+    sliderValue = 5;
   }
 
   render() {
-    const { survey, surveyActions } = this.props;
+    const { survey, surveyActions , sliderValue} = this.props;
 
     // Just a safety check
     if (survey.questions.length == 0) {
@@ -134,6 +149,30 @@ export class Survey extends Component {
               {radioButtons}
             </RadioGroup>
           </div>
+          <div>
+            <button style={Style.primaryButton}
+                    onClick={() => this.sendResponse(RES_VALUES)}
+            >Next</button>
+          </div>
+          <div style={this.styles.outerBar}>
+            <div style={::this.innerBarStyle()}></div>
+          </div>
+          <div style={Style.smallType}>{::this.answeredQuestions()} / {::this.totalQuestions()} Questions Answered</div>
+        </div>
+      );
+
+    } else if (questionType === "slider") {
+
+      return (
+        <div style={Style.CONTAINER_BASE}>
+          <div style={Style.largeType}>{currentQuestion.title}</div>
+          <br></br>
+          <div>
+            <input type="range" step="1" min="1" max="10" onChange={this.saveListForSlider}></input>
+            <br> </br>
+            <input type="text" id="rangeVal" />
+          </div>
+          <br></br>
           <div>
             <button style={Style.primaryButton}
                     onClick={() => this.sendResponse(RES_VALUES)}
