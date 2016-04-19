@@ -110,7 +110,7 @@ export class Survey extends Component {
       return (
         <div style={Style.CONTAINER_BASE}>
           <div style={Style.largeType}>{currentQuestion.title}</div>
-          <div style={Style.innercontainer}>
+          <div>
             <CheckBoxList defaultData={data}
                           onChange={this.saveList.bind(this)}
                           ref="respValues" />
@@ -143,7 +143,7 @@ export class Survey extends Component {
       return (
         <div style={Style.CONTAINER_BASE}>
           <div style={Style.largeType}>{currentQuestion.title}</div>
-          <div style={Style.innercontainer}>
+          <div>
             <RadioGroup name="responseValues" onChange={this.saveListForRadioButton}>
               {radioButtons}
             </RadioGroup>
