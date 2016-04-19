@@ -8,7 +8,6 @@ import * as Style from '../constants/Style';
 import CheckBoxList from 'react-checkbox-list';
 import _ from 'lodash';
 import RadioGroup from 'react-radio';
-import ReactSliderNativeBootstrap from 'react-bootstrap-native-slider';
 
 var RES_VALUES = [];
 var sliderValue = 5;
